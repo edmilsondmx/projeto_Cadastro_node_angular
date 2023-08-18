@@ -1,0 +1,60 @@
+<div class="container bg-light-subtle mt-3">
+  <header
+    class="d-flex flex-wrap justify-content-center py-1 mb-2 border-bottom Header"
+  >
+    <a
+      routerLink="/pessoa"
+      class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
+    >
+      <svg class="bi me-2" width="40" height="32">
+        <use xlink:href="#bootstrap"></use>
+      </svg>
+      <span class="fs-1"
+        ><i class="fa-solid fa-location-dot fa-bounce text-danger"></i>
+        MeuCadastro<span class="text-danger">.</span>com</span
+      >
+    </a>
+
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <a routerLink="/pessoa" routerLinkActive="active" class="nav-link"
+          >Pessoas</a
+        >
+      </li>
+      <li class="nav-item">
+        <a routerLink="/bairro" routerLinkActive="active" class="nav-link"
+          >Bairros</a
+        >
+      </li>
+      <li class="nav-item">
+        <a routerLink="/municipio" routerLinkActive="active" class="nav-link"
+          >Municípios</a
+        >
+      </li>
+      <li class="nav-item">
+        <a routerLink="/uf" routerLinkActive="active" class="nav-link">UFs</a>
+      </li>
+      <li class="nav-item" *ngIf="!userAuthorized">
+        <button
+          class="btn btn-outline-success px-3 ms-3"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          type="button"
+        >
+          Login
+        </button>
+      </li>
+      <li class="nav-item" *ngIf="userAuthorized">
+        <button
+          (click)="sair()"
+          class="btn btn-outline-secondary px-3 ms-3"
+          type="button"
+        >
+          Sair
+        </button>
+      </li>
+    </ul>
+  </header>
+</div>
+
+<app-login-modal> </app-login-modal>

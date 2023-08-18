@@ -1,0 +1,65 @@
+.card-header {
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #ddd;
+}
+
+.card-title {
+  margin-bottom: 0;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.endereco-card {
+  flex-basis: calc(50% - 10px);
+}
+
+.endereco-title {
+  margin-bottom: 10px;
+}
+
+.endereco-info {
+  background-color: #f7f7f7;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.endereco-info p {
+  margin-bottom: 5px;
+}
+
+.dados-pessoa {
+  border-radius: 16px;
+  box-shadow: 0 30px 30px -25px rgba(0, 38, 255, 0.205);
+  padding: 20px;
+  background-color: #fff;
+  color: #697e91;
+}
+
+.card-title, .dados-pessoa strong {
+  font-weight: 600;
+  color: #425275;
+}
+
+.codigo-pessoa {
+  width: 90%;
+  position: absolute;
+  top: 55px;
+  left: 0px;
+  background-color: #dde5f1;
+  border-radius: 0 99em 99em 0;
+  padding: 0.625em 0.75em;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #425475;
+}
+
+.codigo-pessoa small {
+  color: #707a91;
+  font-size: 0.75em;
+  margin-left: 0.25em;
+  margin-right: 0.25em;
+}

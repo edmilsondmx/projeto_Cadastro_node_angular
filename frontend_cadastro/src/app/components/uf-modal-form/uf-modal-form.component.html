@@ -1,0 +1,103 @@
+<div
+  class="modal fade"
+  #modal
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ titulo }}</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form
+          #form="ngForm"
+          [formGroup]="ufForm"
+          (ngSubmit)="salvar(); form.reset()"
+        >
+          <div class="mb-3">
+            <label for="siglaInput" class="form-label">Sigla</label>
+            <input
+              formControlName="sigla"
+              type="text"
+              class="form-control"
+              name="sigla"
+              style="width: 282px"
+              id="siglaInput"
+              placeholder="Ex: SP"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="nomeInput" class="form-label">Nome</label>
+            <input
+              formControlName="nome"
+              type="text"
+              class="form-control"
+              name="nome"
+              style="width: 282px"
+              id="nomeInput"
+              placeholder="Ex: Sao Paulo"
+              required
+            />
+          </div>
+          <label for="statusInput" class="form-label">Status</label>
+          <div>
+            <input
+              formControlName="status"
+              type="radio"
+              class="btn-check"
+              name="status"
+              id="success-outlined"
+              autocomplete="off"
+              [value]="1"
+            />
+            <label class="btn btn-outline-success me-3" for="success-outlined"
+              >Ativo</label
+            >
+
+            <input
+              formControlName="status"
+              type="radio"
+              class="btn-check"
+              name="status"
+              id="danger-outlined"
+              autocomplete="off"
+              [value]="2"
+            />
+            <label class="btn btn-outline-danger" for="danger-outlined"
+              >Inativo</label
+            >
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Fechar
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+              [disabled]="!form.valid"
+            >
+              Salvar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

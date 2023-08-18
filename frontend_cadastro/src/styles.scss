@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'node_modules/ngx-toastr/toastr.css';
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.marcador {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+}
+
+.menu{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  height: 80px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 10px;
+}
+
+.rounded-circle{
+  width: 90px;
+  height: 50px;
+}

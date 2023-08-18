@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="menu">
+    <h2 class="text-secondary text-center">Cadastro de UFs</h2>
+    <button
+      type="button"
+      class="btn btn-outline-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#staticBackdrop"
+      (click)="adicionarUf()"
+    >
+      <i class="fa-solid fa-circle-plus"></i> Adicionar
+    </button>
+  </div>
+  <hr />
+  <div>
+    <form
+      [formGroup]="search"
+      class="d-flex col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3"
+      role="search"
+      (ngSubmit)="pesquisarUF()"
+    >
+      <select
+        formControlName="campo"
+        class="form-select me-2"
+        aria-label="Default select example"
+      >
+        <option value="-1" selected>Pesquisar por:</option>
+        <option value="codigoUF">Código UF</option>
+        <option value="sigla">Sigla</option>
+        <option value="nome">Nome</option>
+        <option value="status">Status</option>
+      </select>
+      <input
+        formControlName="valor"
+        type="search"
+        class="form-control form-control ms-2"
+        placeholder="Valor..."
+        aria-label="Search"
+        id="inputSearch"
+      />
+      <button
+        class="btn btn-outline-primary rounded-circle ms-3"
+        type="submit"
+        [disabled]="!search.valid"
+      >
+        <i class="fa-solid fa-search"></i>
+      </button>
+      <button
+        class="btn btn-outline-danger rounded-circle ms-3"
+        type="button"
+        (click)="limparPesquisa()"
+      >
+        <i class="fa-solid fa-x"></i>
+      </button>
+    </form>
+    <div
+      *ngIf="dadosUf.length === 0"
+      class="my-4 mx-4 alert alert-warning text-center"
+      role="alert"
+    >
+      Nenhuma UF cadastrada no momento!
+    </div>
+    <app-tabela-lista
+      *ngIf="dadosUf.length !== 0"
+      [titles]="titles"
+      [campos]="campos"
+      [dados]="dadosUf"
+      (editarItem)="editarUF($event)"
+      (excluirItem)="excluirUF($event)"
+    ></app-tabela-lista>
+  </div>
+</div>
+<app-uf-modal-form
+  #staticBackdrop
+  [titulo]="tituloModal"
+  [ufForm]="novaUFForm"
+  (salvarItem)="salvarUF()"
+></app-uf-modal-form>

@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="menu">
+    <h2 class="text-secondary text-center">Cadastro de Bairros</h2>
+    <button
+      type="button"
+      class="btn btn-outline-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#staticBackdrop"
+      (click)="adicionarBairro()"
+    >
+      <i class="fa-solid fa-circle-plus"></i> Adicionar
+    </button>
+  </div>
+  <hr />
+  <div>
+    <form
+      [formGroup]="search"
+      class="d-flex col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3"
+      role="search"
+      (ngSubmit)="pesquisarBairro()"
+    >
+      <select
+        formControlName="campo"
+        class="form-select me-2"
+        aria-label="Default select example"
+      >
+        <option value="-1">Pesquisar por:</option>
+        <option value="codigoBairro">Código Bairro</option>
+        <option value="codigoMunicipio">Código Município</option>
+        <option value="nome">Nome</option>
+        <option value="status">Status</option>
+      </select>
+      <input
+        formControlName="valor"
+        type="search"
+        class="form-control form-control ms-2"
+        placeholder="Pesquisar..."
+        aria-label="Search"
+        id="inputSearch"
+      />
+      <button
+        class="btn btn-primary rounded-circle p-2 lh-1 ms-3"
+        type="submit"
+      >
+        <i class="fa-solid fa-search"></i>
+      </button>
+      <button
+        class="btn btn-danger rounded-circle p-2 lh-1 ms-3"
+        type="button"
+        (click)="limparPesquisa()"
+      >
+        <i class="fa-solid fa-x"></i>
+      </button>
+    </form>
+    <div
+      *ngIf="dadosBairros.length === 0"
+      class="my-4 mx-4 alert alert-warning text-center"
+      role="alert"
+    >
+      Nenhum Bairro cadastrado no momento!
+    </div>
+    <app-tabela-lista
+      *ngIf="dadosBairros.length !== 0"
+      [titles]="titles"
+      [campos]="campos"
+      [dados]="dadosBairros"
+      (editarItem)="editarBairro($event)"
+      (excluirItem)="excluirBairro($event)"
+    ></app-tabela-lista>
+  </div>
+</div>
+
+<app-bairro-modal-form
+  #staticBackdrop
+  [titulo]="tituloModal"
+  [bairroForm]="novoBairroForm"
+  (salvarItem)="salvarBairro()"
+></app-bairro-modal-form>

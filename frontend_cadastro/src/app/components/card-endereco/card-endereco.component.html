@@ -1,0 +1,91 @@
+<div class="d-flex justify-content-around flex-wrap">
+  <div class="plan" *ngFor="let endereco of enderecos">
+    <div class="inner">
+      <span class="pricing">
+        <span>
+          <small>Endereço código: </small> {{ endereco.codigoEndereco }}
+        </span>
+      </span>
+      <ul class="features">
+        <li>
+          <span class="icon">
+            <i class="fa-solid fa-location-dot"></i>
+          </span>
+          <span
+            >Rua: <strong>{{ endereco.nomeRua }}</strong></span
+          >
+        </li>
+        <li>
+          <span class="icon">
+            <i class="fa-solid fa-location-dot"></i>
+          </span>
+          <span
+            >Número: <strong>{{ endereco.numero }}</strong></span
+          >
+        </li>
+        <li>
+          <span class="icon">
+            <i class="fa-solid fa-location-dot"></i>
+          </span>
+          <span
+            >Complemento: <strong>{{ endereco.complemento }}</strong></span
+          >
+        </li>
+        <li>
+          <span class="icon">
+            <i class="fa-solid fa-location-dot"></i>
+          </span>
+          <span
+            >CEP: <strong>{{ endereco.cep }}</strong></span
+          >
+        </li>
+        <li>
+          <span class="icon">
+            <i class="fa-solid fa-location-dot"></i>
+          </span>
+          <span
+            >Bairro:
+            <strong
+              [ngStyle]="{
+                color: endereco.bairro.status === 1 ? '#42b80c' : '#df2626'
+              }"
+              >{{ endereco.bairro.nome }}</strong
+            ></span
+          >
+        </li>
+        <li>
+          <span class="icon">
+            <i class="fa-solid fa-location-dot"></i>
+          </span>
+          <span
+            >Município:
+            <strong
+              [ngStyle]="{
+                color:
+                  endereco.bairro.municipio.status === 1 ? '#42b80c' : '#df2626'
+              }"
+              >{{ endereco.bairro.municipio.nome }}</strong
+            ></span
+          >
+        </li>
+        <li>
+          <span class="icon">
+            <i class="fa-solid fa-location-dot"></i>
+          </span>
+          <span
+            >UF:
+            <strong
+              [ngStyle]="{
+                color:
+                  endereco.bairro.municipio.uf.status === 1
+                    ? '#42b80c'
+                    : '#df2626'
+              }"
+              >{{ endereco.bairro.municipio.uf.sigla }}</strong
+            ></span
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

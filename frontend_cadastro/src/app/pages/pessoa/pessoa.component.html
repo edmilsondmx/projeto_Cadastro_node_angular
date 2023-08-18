@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="menu">
+    <h2 class="text-secondary text-center">Cadastro de Pessoa</h2>
+    <button
+      type="button"
+      class="btn btn-outline-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#staticBackdrop"
+      (click)="adicionarPessoa()"
+    >
+      <i class="fa-solid fa-circle-plus"></i> Adicionar
+    </button>
+  </div>
+  <hr />
+  <div>
+    <form
+      [formGroup]="search"
+      class="d-flex col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3"
+      role="search"
+      (ngSubmit)="pesquisaPessoa()"
+    >
+      <select
+        formControlName="campo"
+        class="form-select me-2"
+        aria-label="Default select example"
+      >
+        <option value="-1" selected>Pesquisar por:</option>
+        <option value="codigoPessoa">Código Pessoa</option>
+        <option value="login">Login</option>
+        <option value="status">Status</option>
+        <option value="nome">Nome</option>
+        <option value="codigoUF">Código UF</option>
+      </select>
+      <input
+        formControlName="valor"
+        type="search"
+        class="form-control form-control ms-2"
+        placeholder="Pesquisar..."
+        aria-label="Search"
+        id="inputSearch"
+      />
+      <button
+        class="btn btn-primary rounded-circle p-2 lh-1 ms-3"
+        type="submit"
+      >
+        <i class="fa-solid fa-search"></i>
+      </button>
+      <button
+        class="btn btn-danger rounded-circle p-2 lh-1 ms-3"
+        type="button"
+        (click)="limparPesquisa()"
+      >
+        <i class="fa-solid fa-x"></i>
+      </button>
+    </form>
+    <div
+      *ngIf="dadosPessoa.length === 0"
+      class="my-4 mx-4 alert alert-warning text-center"
+      role="alert"
+    >
+      Nenhuma Pessoa cadastrada no momento!
+    </div>
+    <app-tabela-lista
+      *ngIf="dadosPessoa.length !== 0"
+      [titles]="titles"
+      [campos]="campos"
+      [dados]="dadosPessoa"
+      (editarItem)="editarPessoa($event)"
+      (excluirItem)="excluirPessoa($event)"
+      (showItem)="showPessoa($event)"
+    ></app-tabela-lista>
+  </div>
+</div>
+
+<app-pessoa-modal-form
+  #staticBackdrop
+  [titulo]="tituloModal"
+  [pessoaForm]="novaPessoaForm"
+  (salvarItem)="salvarPessoa()"
+></app-pessoa-modal-form>
+
+<app-show-pessoa
+  #showPessoaModal
+  [pessoaSelecionada]="pessoaSelecionada"
+  (editarItem)="editarPessoa($event)"
+>
+</app-show-pessoa>

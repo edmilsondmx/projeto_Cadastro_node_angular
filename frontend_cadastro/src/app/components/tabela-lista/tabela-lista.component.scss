@@ -1,0 +1,43 @@
+.table>:not(caption)>*>* {
+  color: inherit!important;
+}
+
+.menu-button {
+  display: flex;
+  position: relative;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+.menu-items {
+  display: flex;
+  align-items: flex-start;
+}
+
+.show {
+  display: flex !important;
+}
+
+@media (max-width: 995px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .menu-items {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    bottom: -40px;
+    right: 98px;
+    background-color: rgb(255, 241, 137);
+    padding: 20px;
+    border-radius: 20px 20px 0 20px;
+    transform: translate(50%, -50%);
+    align-items: center;
+  }
+  .btn{
+    margin: 5px;
+  }
+}

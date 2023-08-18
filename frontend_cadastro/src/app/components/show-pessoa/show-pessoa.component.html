@@ -1,0 +1,126 @@
+<div
+  class="modal fade"
+  #modal
+  id="showPessoaModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="showPessoaModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          id="close"
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+        <hr />
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between mb-4">
+              <h2 class="card-title">Dados da Pessoa</h2>
+              <button
+                type="button"
+                class="btn btn-outline-primary"
+                title="Editar"
+                (click)="emitirEditarItem()"
+                data-bs-dismiss="modal"
+              >
+                <i class="fa-solid fa-pencil"></i>
+              </button>
+            </div>
+            <div class="card-body dados-pessoa">
+              <div class="row">
+                <p class="codigo-pessoa">
+                  <small>Código da Pessoa: </small>
+                  <strong> {{ pessoa?.codigoPessoa }}</strong>
+                </p>
+                <div class="col-md-6 mt-4">
+                  <p>
+                    Nome: <strong>{{ pessoa?.nome }}</strong>
+                  </p>
+                  <p>
+                    Sobrenome: <strong>{{ pessoa?.sobrenome }}</strong>
+                  </p>
+                  <p>
+                    Idade: <strong>{{ pessoa?.idade }}</strong>
+                  </p>
+                </div>
+                <div class="col-md-6 mt-4">
+                  <p>
+                    Login: <strong>{{ pessoa?.login }}</strong>
+                  </p>
+                  <p>
+                    Senha: <strong>{{ pessoa?.senha }}</strong>
+                  </p>
+                  <p>
+                    Status:
+                    <strong
+                      [ngStyle]="{
+                        color: pessoa?.status === 1 ? '#42b80c' : '#df2626'
+                      }"
+                    >
+                      {{ pessoa?.status === 1 ? "Ativo" : "Inativo" }}</strong
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Endereços</h2>
+            </div>
+            <div class="card-body">
+              <div
+                *ngIf="pessoa?.enderecos.length === 0"
+                class="my-4 mx-4 alert alert-warning text-center"
+                role="alert"
+              >
+                <p>Nenhum endereço cadastrado!</p>
+                <small>Por favor, cadastre um endereço para a pessoa!</small>
+              </div>
+              <app-card-endereco
+                [enderecos]="pessoa?.enderecos"
+              ></app-card-endereco>
+              <div class="mt-3">
+                <div>
+                  <span
+                    style="
+                      display: inline-block;
+                      width: 50px;
+                      height: 8px;
+                      background-color: #42b80c;
+                    "
+                    class="me-1"
+                  ></span>
+                  Ativo
+                </div>
+
+                <div>
+                  <span
+                    style="
+                      display: inline-block;
+                      width: 50px;
+                      height: 8px;
+                      background-color: #df2626;
+                    "
+                    class="me-1"
+                  ></span>
+                  Inativo
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

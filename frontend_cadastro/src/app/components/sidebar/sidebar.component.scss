@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap');
+
+.Header .fs-1{
+  font-family: 'Cherry Bomb One', cursive;
+  color: #031633;
+}
+.active {
+  background-color: #031633 !important;
+  border-radius: 10px;
+  box-shadow: 0 20px 50px #37455725;
+  color: #ffffff!important;
+}
+
+.nav-item .nav-link{
+  color: #031633;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+}

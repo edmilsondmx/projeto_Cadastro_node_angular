@@ -1,0 +1,319 @@
+<div
+  class="modal fade"
+  #modal
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ titulo }}</h1>
+        <div>
+          <button
+            type="button"
+            id="add-endereco-btn"
+            class="btn btn-warning ms-4"
+            (click)="cloneEnderecoForm()"
+          >
+            <i class="fa-solid fa-plus"></i> Endereço
+          </button>
+        </div>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form #form="ngForm" [formGroup]="pessoaForm" (ngSubmit)="salvar()">
+          <div class="d-flex">
+            <div class="cadastro-pessoa mx-3">
+              <h4>Dados Pessoa:</h4>
+              <div class="form-floating mb-3">
+                <input
+                  formControlName="nome"
+                  type="text"
+                  class="form-control"
+                  name="nome"
+                  style="width: 282px"
+                  id="nomeInput"
+                  placeholder="Nome"
+                  required
+                />
+                <label class="text-secondary" for="nomeInput">Nome</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  formControlName="sobrenome"
+                  type="text"
+                  class="form-control"
+                  name="sobrenome"
+                  style="width: 282px"
+                  id="sobrenomeInput"
+                  placeholder="Sobrenome"
+                  required
+                />
+                <label for="sobrenomeInput">Sobrenome</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  formControlName="idade"
+                  type="number"
+                  class="form-control"
+                  name="idade"
+                  style="width: 282px"
+                  id="idadeInput"
+                  placeholder="Idade"
+                  required
+                />
+                <label
+                  for="idadeInput"
+                  [ngStyle]="{
+                    color:
+                      pessoaForm.controls['idade'].dirty &&
+                      pessoaForm.controls['idade'].invalid
+                        ? '#df2626'
+                        : ''
+                  }"
+                  >{{
+                    pessoaForm.controls["idade"].dirty &&
+                    pessoaForm.controls["idade"].invalid
+                      ? "Idade inválida!"
+                      : "Idade"
+                  }}</label
+                >
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  formControlName="login"
+                  type="email"
+                  class="form-control"
+                  name="login"
+                  style="width: 282px"
+                  id="loginInput"
+                  placeholder="name@example.com"
+                  required
+                />
+                <label
+                  for="loginInput"
+                  [ngStyle]="{
+                    color:
+                      pessoaForm.controls['login'].dirty &&
+                      pessoaForm.controls['login'].invalid
+                        ? '#df2626'
+                        : ''
+                  }"
+                  >{{
+                    pessoaForm.controls["login"].dirty &&
+                    pessoaForm.controls["login"].invalid
+                      ? "E-mail inválido!"
+                      : "Login - name@example.com"
+                  }}</label
+                >
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  formControlName="senha"
+                  type="password"
+                  class="form-control"
+                  name="senha"
+                  style="width: 282px"
+                  id="senhaInput"
+                  placeholder="Senha"
+                  required
+                />
+                <abbr
+                  class="visualizar"
+                  title="Mostrar"
+                  (click)="visualizarSenha()"
+                  ><i
+                    *ngIf="!visualizar_senha"
+                    class="fas fa-eye icon-modify"
+                  ></i
+                ></abbr>
+                <abbr
+                  class="visualizar"
+                  title="Esconder"
+                  (click)="visualizarSenha()"
+                  ><i *ngIf="visualizar_senha" class="fa-solid fa-eye-slash"></i
+                ></abbr>
+                <label
+                  for="senhaInput"
+                  [ngStyle]="{
+                    color:
+                      pessoaForm.controls['senha'].dirty &&
+                      pessoaForm.controls['senha'].invalid
+                        ? '#df2626'
+                        : ''
+                  }"
+                  >{{
+                    pessoaForm.controls["senha"].dirty &&
+                    pessoaForm.controls["senha"].invalid
+                      ? "Senha inválida"
+                      : "Senha - minimo 6 caracteres"
+                  }}</label
+                >
+              </div>
+              <label for="statusInput" class="form-label">Status</label>
+              <div>
+                <input
+                  formControlName="status"
+                  type="radio"
+                  class="btn-check"
+                  name="status"
+                  id="success-outlined"
+                  autocomplete="off"
+                  [value]="1"
+                />
+                <label
+                  class="btn btn-outline-success me-3"
+                  for="success-outlined"
+                  >Ativo</label
+                >
+
+                <input
+                  formControlName="status"
+                  type="radio"
+                  class="btn-check"
+                  name="status"
+                  id="danger-outlined"
+                  autocomplete="off"
+                  [value]="2"
+                />
+                <label class="btn btn-outline-danger" for="danger-outlined"
+                  >Inativo</label
+                >
+              </div>
+            </div>
+            <div
+              formArrayName="enderecos"
+              id="endereco-container"
+              class="d-flex"
+            >
+              <div
+                class="cadastro-endereco me-2"
+                *ngFor="
+                  let endereco of pessoaForm.get('enderecos').controls;
+                  let i = index
+                "
+                [formGroupName]="i"
+              >
+                <h4>Dados Endereço:</h4>
+                <div class="form-floating mb-3">
+                  <select
+                    formControlName="codigoBairro"
+                    class="form-select"
+                    name="codigoBairro"
+                    style="width: 282px"
+                    id="codigoBairroInput"
+                    required
+                  >
+                    <option [value]="-1" selected>Selecione um Bairro</option>
+                    <option
+                      *ngFor="let bairro of listaBairros"
+                      [ngValue]="bairro.codigoBairro"
+                      [disabled]="bairro.status === 2"
+                    >
+                      {{ bairro.codigoBairro }} - {{ bairro.nome
+                      }}{{ bairro.status === 2 ? " - (Inativo)" : "" }}
+                    </option>
+                  </select>
+                  <label for="codigoBairroInput">Bairro</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input
+                    formControlName="nomeRua"
+                    type="text"
+                    class="form-control"
+                    id="nomeRua"
+                    name="nomeRua"
+                    placeholder="Nome da Rua"
+                  />
+                  <label for="nomeRua">Rua</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input
+                    formControlName="numero"
+                    type="text"
+                    class="form-control"
+                    id="numero"
+                    name="numero"
+                    placeholder="Número"
+                  />
+                  <label for="numero">Número</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input
+                    formControlName="complemento"
+                    type="text"
+                    class="form-control"
+                    id="complemento"
+                    name="complemento"
+                    placeholder="Complemento"
+                  />
+                  <label for="complemento">Complemento</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input
+                    formControlName="cep"
+                    type="text"
+                    class="form-control"
+                    id="cep"
+                    name="cep"
+                    placeholder="Cep 00000-000"
+                  />
+                  <label
+                    for="cep"
+                    [ngStyle]="{
+                      color:
+                        endereco.controls['cep'].dirty &&
+                        endereco.controls['cep'].invalid
+                          ? '#df2626'
+                          : ''
+                    }"
+                    >{{
+                      endereco.controls["cep"].dirty &&
+                      endereco.controls["cep"].invalid
+                        ? "Cep inválido"
+                        : "Cep Ex.: 00000-000"
+                    }}</label
+                  >
+                </div>
+                <button
+                  class="btn btn-outline-danger"
+                  (click)="removerEndereco(i)"
+                  [disabled]="pessoaForm.get('enderecos').controls.length <= 1"
+                >
+                  Excluir
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+              (click)="form.reset()"
+            >
+              Fechar
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+              [disabled]="!form.valid"
+            >
+              Salvar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

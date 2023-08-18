@@ -1,0 +1,103 @@
+<table class="table table-striped mt-3">
+  <thead>
+    <tr>
+      <th *ngFor="let title of titles">{{ title }}</th>
+      <th>Status</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="let item of dados; let i = index"
+      [ngStyle]="{ color: item.status === 1 ? '' : '#a8aaad' }"
+    >
+      <td *ngFor="let campo of campos">
+        {{ item[campo] }}
+      </td>
+      <td class="status">
+        <span
+          class="marcador"
+          [ngStyle]="{
+            backgroundColor: item.status === 1 ? '#42b80c' : '#df2626'
+          }"
+        ></span>
+      </td>
+      <td>
+        <div id="menu-{{ item[i] }}" class="menu-button">
+          <button
+            type="button"
+            class="btn btn-{{
+              showMenuArray[i] ? 'danger' : 'primary'
+            }} menu-toggle"
+            (click)="toggleMenu(i)"
+          >
+            <ng-container *ngIf="!showMenuArray[i]">
+              <i class="fa-solid fa-bars"></i>
+            </ng-container>
+            <ng-container *ngIf="showMenuArray[i]">
+              <i class="fa-solid fa-times"></i>
+            </ng-container>
+          </button>
+          <div class="menu-items" [ngClass]="{ show: showMenuArray[i] }">
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              title="Editar"
+              (click)="emitirEditarItem(item)"
+            >
+              <i class="fa-solid fa-pencil"></i>
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-danger ms-2"
+              title="Excluir"
+              (click)="emitirExcluirItem(item)"
+            >
+              <i class="fa-solid fa-trash"></i>
+            </button>
+            <button
+              *ngIf="titles[3] === 'Idade'"
+              type="button"
+              class="btn btn-outline-success ms-2"
+              title="Show"
+              (click)="emitirShowItem(item)"
+            >
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+        </div>
+      </td>
+
+      <!-- <td>
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          title="Editar"
+          (click)="emitirEditarItem(item)"
+        >
+          <i class="fa-solid fa-pencil"></i>
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-danger ms-2"
+          title="Excluir"
+          (click)="emitirExcluirItem(item)"
+        >
+          <i class="fa-solid fa-trash"></i>
+        </button>
+        <button
+          *ngIf="titles[3] === 'Idade'"
+          type="button"
+          class="btn btn-outline-success ms-2"
+          title="Show"
+          (click)="emitirShowItem(item)"
+        >
+          <i class="fa-solid fa-eye"></i>
+        </button>
+      </td> -->
+    </tr>
+  </tbody>
+  <!-- <div class="text-right">
+    <pagination-controls (pageChange)="pag = $event"></pagination-controls>
+  </div> -->
+</table>
